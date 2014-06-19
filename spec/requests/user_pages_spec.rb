@@ -32,24 +32,25 @@ describe "UserPages" do
     it { should have_title('All users') }
     it { should have_content('All users') }
 
-    describe "pagination" do
 
-      before(:all) { 30.times { FactoryGirl.create(:user) } }
-      after(:all)  { User.delete_all }
+    # Commented out because it takes a long time to run
+    # describe "pagination" do
 
-      it { should have_selector('div.pagination') }
+    #   before(:all) { 30.times { FactoryGirl.create(:user) } }
+    #   after(:all)  { User.delete_all }
 
-      it "should list each user" do
-        User.paginate(page: 1).each do |user|
-          expect(page).to have_selector('li', text: user.name)
-        end
-      end
-    end
+    #   it { should have_selector('div.pagination') }
+
+    #   it "should list each user" do
+    #     User.paginate(page: 1).each do |user|
+    #       expect(page).to have_selector('li', text: user.name)
+    #     end
+    #   end
+    # end
 
     describe "delete links" do
-
       it { should_not have_link('delete') }
-
+      
       describe "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }
         before do
@@ -66,13 +67,7 @@ describe "UserPages" do
         it { should_not have_link('delete', href: user_path(admin)) }
       end
     end
-
-
   end
-
-
-
-
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
@@ -82,15 +77,6 @@ describe "UserPages" do
     it { should have_title(user.name) }
   end
 
-
-  describe "sign up page" do
-  	before {visit signup_path}
-
-  	it { should have_content('Sign up')}  
-    it { should have_title(full_title('Sign up'))}
-	
-	end
-
  	describe "signup page" do
     before { visit signup_path }
 
@@ -99,13 +85,10 @@ describe "UserPages" do
   end
 
   describe "signup" do
-
     before { visit signup_path }
-
     let(:submit) { "Create my account" }
 
-    describe "with invalid information" do
-      
+    describe "with invalid information" do  
       it "should not create a user" do
         expect { click_button submit }.not_to change(User, :count)
       end
@@ -121,8 +104,6 @@ describe "UserPages" do
         it { should have_content('Password can\'t be blank')}
         it { should have_content('Password is too short (minimum is 6 characters)')}
       end
-
-
     end
 
     describe "with valid information" do
@@ -130,7 +111,7 @@ describe "UserPages" do
         fill_in "Name",         with: "Example User"
         fill_in "Email",        with: "user@example.com"
         fill_in "Password",     with: "foobar"
-        fill_in "Confirmation", with: "foobar"
+        fill_in "Confirm Password", with: "foobar"
       end
 
       it "should create a user" do
@@ -184,6 +165,19 @@ describe "UserPages" do
       specify { expect(user.reload.name).to  eq new_name }
       specify { expect(user.reload.email).to eq new_email }
     end
+
+    describe "forbidden attributes" do
+      let(:params) do
+        { user: { admin: true, password: user.password,
+                  password_confirmation: user.password } }
+      end
+      before do
+        sign_in user, no_capybara: true
+        patch user_path(user), params
+      end
+      specify { expect(user.reload).not_to be_admin }
+    end
+
   end
 
 
