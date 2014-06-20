@@ -3,24 +3,7 @@ require 'spec_helper'
 describe "UserPages" do
   
   subject { page }
-  
-  # describe "index" do
-  #   before do
-  #     sign_in FactoryGirl.create(:user)
-  #     FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
-  #     FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
-  #     visit users_path
-  #   end
 
-  #   it { should have_title('All users') }
-  #   it { should have_content('All users') }
-
-  #   it "should list each user" do
-  #     User.all.each do |user|
-  #       expect(page).to have_selector('li', text: user.name)
-  #     end
-  #   end
-  # end
 
   describe "index" do
     let(:user) { FactoryGirl.create(:user) }
@@ -34,6 +17,9 @@ describe "UserPages" do
 
 
     # Commented out because it takes a long time to run
+
+    # ***********   do not delete   *************
+
     # describe "pagination" do
 
     #   before(:all) { 30.times { FactoryGirl.create(:user) } }
@@ -82,6 +68,26 @@ describe "UserPages" do
 
     it { should have_content('Sign up') }
     it { should have_title(full_title('Sign up')) }
+  end
+
+
+
+# ****************************************************************************************************
+
+  describe "signup page when logged in" do          
+    let(:user) { FactoryGirl.create(:user) }  
+    before { sign_in user, no_capybara: true }
+    
+    describe "x" do 
+      before { get new_user_path(user) }
+      specify { expect(response).to redirect_to(root_url) }
+    end
+
+    describe "y" do 
+      before { post '/users'}
+      specify { expect(response).to redirect_to(root_url) }
+    end
+
   end
 
   describe "signup" do
@@ -136,6 +142,7 @@ describe "UserPages" do
       sign_in user
       visit edit_user_path(user) 
     end
+    
     describe "page" do
       it { should have_content("Update your profile") }
       it { should have_title("Edit user") }
@@ -177,7 +184,6 @@ describe "UserPages" do
       end
       specify { expect(user.reload).not_to be_admin }
     end
-
   end
 
 
