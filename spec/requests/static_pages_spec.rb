@@ -32,6 +32,29 @@ describe "Static pages" do
         end
       end
     end
+  
+    describe "microposts count" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+        # FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+        sign_in user
+        visit root_path
+      end
+
+      it { should have_content('1 micropost') }
+
+      describe "Extend to 4" do
+        before do
+          FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+          FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+          # sign_in user
+          visit root_path
+        end
+
+        it { should have_content('3 microposts') }
+      end
+    end
   end
 
   describe "Help page" do
