@@ -71,6 +71,37 @@ describe "UserPages" do
     end
 
   end
+# # exercise 4 
+  describe "other users profile page" do
+    let(:alice) { FactoryGirl.create(:user) }
+    let(:bob) { FactoryGirl.create(:user, email: "wrong@example.com") }
+    let!(:m1) { FactoryGirl.create(:micropost, user: alice, content: "Foo") }
+    let!(:m2) { FactoryGirl.create(:micropost, user: bob, content: "Bar") }
+
+    describe "same user logged in" do
+      before do
+        sign_in alice
+        visit user_path(alice)
+      end
+
+      it { should have_content(alice.name) }
+      it { should_not have_content(bob.name) }
+      it { should have_link('delete') }
+    end
+
+    describe "different user logged in" do
+      before do
+        sign_in bob
+        visit user_path(alice)
+      end
+
+      it { should have_content(alice.name) }
+      it { should_not have_content(bob.name) }
+      it { should_not have_link('delete') }
+    end
+  end
+
+
 
  	describe "signup page" do
     before { visit signup_path }
@@ -197,4 +228,8 @@ describe "UserPages" do
 
 
 end
+
+
+
+
 
