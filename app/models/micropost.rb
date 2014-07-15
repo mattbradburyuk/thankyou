@@ -1,4 +1,4 @@
-# class Micropost < ActiveRecord::Base
+class Micropost < ActiveRecord::Base
 
 # 	belongs_to :user
 # 	default_scope -> { order('created_at DESC') }
@@ -16,4 +16,4 @@
 #           user_id: user.id)
 #   end
 
-# end
+end
