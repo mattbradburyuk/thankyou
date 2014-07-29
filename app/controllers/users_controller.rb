@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
 	def show
     @user = User.find(params[:id])
-    # @microposts = @user.microposts.paginate(page: params[:page])
+   
   end
 
   def index
@@ -36,10 +36,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-   
-    # not required anymore as before_action sets @user
-    # @user = User.find(params[:id])
-
   end
   
   def update

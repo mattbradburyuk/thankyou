@@ -42,6 +42,3 @@ class PasswordResetsController < ApplicationController
     end
 
 end
-
-# example url
-# http://localhost:3000/password_resets/ZYTAA61VxsHV6Ahw6tRUDg/edit
