@@ -18,3 +18,5 @@
 /config/database.yml
 
 /to do
+
+/.idea/workspace.xml
