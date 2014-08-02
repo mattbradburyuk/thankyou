@@ -20,3 +20,9 @@
 /to do
 
 /.idea/workspace.xml
+*.swp
+*~
+.project
+.DS_Store
+.idea
+.secret
