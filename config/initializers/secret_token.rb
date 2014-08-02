@@ -10,6 +10,9 @@
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
 
+# Note: .secret is listed in .gitignore so doesnt; get pushed to GIt/ heroku. The code below generates a new secret key
+# when .secret isn;t there so heroku generates a new code each time it is deployed
+
 require 'securerandom'
 
 def secure_token
