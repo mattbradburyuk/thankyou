@@ -1,0 +1,7 @@
+To do
+
+Get password reset working with real email
+
+Workout a proper name
+
+Work out basic mechanics for thankyou

@@ -31,5 +31,18 @@ SampleApp::Application.configure do
 
   # ***** need to add into production *****
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
+  # set up gmail
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+      :enable_starttls_auto => true,
+      :address              => "smtp.live.com",
+      :port                 => "587",
+      :domain               => "mail.live.com",
+      :user_name            => ENV["HOTMAILADDRESS"],
+      :password             => ENV["HMPW"],
+      :authentication       => :plain
+  }
+
 
 end
