@@ -81,4 +81,16 @@ SampleApp::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # set actionmailer config
+  config.action_mailer.smtp_settings = {
+      :enable_starttls_auto => true,
+      :address              => "smtp.live.com",
+      :port                 => "587",
+      :domain               => "mail.live.com",
+      :user_name            => ENV["HOTMAILADDRESS"],
+      :password             => ENV["HMPW"],
+      :authentication       => :plain
+  }
+
 end
