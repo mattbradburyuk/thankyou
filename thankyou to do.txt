@@ -5,3 +5,7 @@ Get password reset working with real email
 Workout a proper name
 
 Work out basic mechanics for thankyou
+
+set up heroku for thankyou + set url??
+
+Work out best modelling technique - research and try a few
