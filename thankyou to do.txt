@@ -9,3 +9,23 @@ Work out basic mechanics for thankyou
 set up heroku for thankyou + set url??
 
 Work out best modelling technique - research and try a few
+
+Work out best work tracking technique
+
+
+First page set up:
+- Objecvtive: practise development process
+- Basic Model Design
+- Tests
+- Basic
+- validations
+- model functions required (how get from design?)
+
+
+analysis techniques:
+
+http://creately.com/blog/diagrams/er-diagrams-tutorial/
+http://creately.com/blog/diagrams/database-modeling-basics/
+
+
+

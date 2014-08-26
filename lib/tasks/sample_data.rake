@@ -5,6 +5,22 @@ namespace :db do
     make_microposts
     make_relationships
   end
+
+  task pop2users: :environment do
+    User.create(name:     "Matt",
+                       email:    "m@b.com",
+                       password: "foobar",
+                       password_confirmation: "foobar",
+                       admin: true)
+
+    User.create(name:     "Ruth",
+                       email:    "r@b.com",
+                       password: "foobar",
+                       password_confirmation: "foobar",
+                       admin: true)
+
+  end
+
 end
 
 def make_users

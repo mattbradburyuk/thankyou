@@ -6,6 +6,8 @@ describe User do
 
  	subject { @user }		  
 
+# base tests
+
  	it { should respond_to(:name) }
  	it { should respond_to(:email) }
  	it { should respond_to(:password_digest) }
@@ -15,9 +17,16 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
 
-	
   it { should be_valid }
   it { should_not be_admin }
+
+# additional
+  it { should respond_to(:thankyous_sent)}
+  it { should respond_to(:thankyous_received)}
+  it { should respond_to(:sent_to_users)}
+  it { should respond_to(:received_from_users)}
+	
+
 
   describe "with admin attribute set to 'true'" do
     before do

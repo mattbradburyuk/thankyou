@@ -21,9 +21,9 @@ FactoryGirl.define do
     end
   end
   
-  factory :micropost do
-    content "Lorem ipsum"
-    user
+  factory :thankyou do
+    content "Test message"
+    user #???? not sure how this works for Thankyous
   end
 
 end

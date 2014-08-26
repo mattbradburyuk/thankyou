@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729180318) do
+ActiveRecord::Schema.define(version: 20140819073635) do
+
+  create_table "thankyous", force: true do |t|
+    t.string   "message"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.boolean  "email_sent"
+    t.boolean  "seen"
+    t.boolean  "acknowledged"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

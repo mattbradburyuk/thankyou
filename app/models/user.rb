@@ -5,7 +5,14 @@ class User < ActiveRecord::Base
 	before_save { self.email = email.downcase }
 
   before_create :create_remember_token
-  
+
+  has_many :thankyous_sent, foreign_key: "sender_id" , class_name: "Thankyou"
+  has_many :thankyous_received, foreign_key: "recipient_id" , class_name: "Thankyou"
+
+  has_many :sent_to_users, through: :thankyous_sent, source: :recipient
+  has_many :received_from_users, through: :thankyous_received, source: :sender
+
+
 
 	validates(:name, presence: true, length: {maximum: 50})
 #	validates :name,  presence: true, length: { maximum: 50 }
