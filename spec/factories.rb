@@ -21,10 +21,13 @@ FactoryGirl.define do
     end
   end
   
-  factory :thankyou do
-    content "Test message"
-    user #???? not sure how this works for Thankyous
-  end
+  # factory :thankyou do
+  #   message "Test message"
+  #   user #???? not sure how this works for Thankyous
+  #   email_sent TRUE
+  #   seen TRUE
+  #   acknowledged TRUE
+  # end
 
 end
 

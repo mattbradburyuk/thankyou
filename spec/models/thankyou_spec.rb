@@ -12,12 +12,20 @@ require 'spec_helper'
 
 describe Thankyou do
 
-  before { @thankyou = Thankyou.new(recipient_id: 1,
-                                    sender_id: 1,
-                                    message:"This is a test message",
+  let(:user1) { FactoryGirl.create(:user) }
+  let(:user2) { FactoryGirl.create(:user) }
+
+  # before { @thankyou = user.thankyous.build(message: "This is a test message") }
+
+
+  before { @thankyou = Thankyou.new(recipient_id: user1.id ,
+                                    sender_id: user2.id,
+                                    message: "This is a test message",
                                     email_sent: TRUE,
                                     seen: TRUE,
                                     acknowledged: TRUE)}
+
+
   subject { @thankyou }
 
   it { should respond_to(:recipient) }
@@ -28,6 +36,21 @@ describe Thankyou do
   it { should respond_to(:acknowledged)}
 
   it { should be_valid }
+
+  describe "when sender_id is not present" do
+    before { @thankyou.sender_id = nil }
+    it { should_not be_valid }
+  end
+
+  describe "when recipient_id is not present" do
+    before { @thankyou.recipient_id = nil }
+    it { should_not be_valid }
+  end
+
+  describe "with blank content" do
+    before { @thankyou.message = " " }
+    it { should_not be_valid }
+  end
 
 
 end
