@@ -154,6 +154,34 @@ describe User do
       last_email.to.should include (@user.email)
     end
   end
+
+  describe "Thankyou" do
+    before do
+      @user2 = User.new(name: "Example User 2", email: "user2@example.com", password: "foobar", password_confirmation: "foobar")
+    end
+
+
+    describe "#create_message" do
+      before do
+        @user.save
+        @user2.save
+        @ty_count = Thankyou.count
+        @thankyou = @user.create_message(@user2, "Test message")
+        @ty_count_new = Thankyou.count
+
+      end
+
+      it "create_message() should increment Thankyou count by 1" do
+        @ty_count_new.should eq (@ty_count + 1)
+      end
+
+      it {@thankyou.message.should  eq "Test message"}
+
+    end
+  end
+
+
+
 end
 
 

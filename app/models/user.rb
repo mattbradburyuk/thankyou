@@ -38,6 +38,26 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
+  # Thankyou feed
+
+  def thankyou_feed
+
+    Thankyou.where(recipient:self)
+
+  end
+
+  # Thankyou create/ delete methods- not sure these are actually necessary just do them in the controller
+
+  def create_message(r, m)
+
+    # self.thankyous_sent.create(message: "test message", sender_id: self.id, recipient_id: r.id)
+    self.thankyous_sent.create(message: m, sender: self, recipient: r)
+
+  end
+
+  # delete_message???
+
+
   private
 
     def generate_password_reset_token(column)
